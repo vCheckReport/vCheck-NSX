@@ -1,12 +1,5 @@
 <a name="Title">
 # vCheck Daily Report for NSX
-[![stars badge]][stars]
-[![forks badge]][forks]
-[![issues badge]][issues]
-
-[stars]:https://github.com/alanrenouf/vCheck-NSX/stargazers
-[forks]:https://github.com/alanrenouf/vCheck-NSX/network
-[issues]:https://github.com/alanrenouf/vCheck-NSX/issues
 
 [Join the VMware Code and #vCheck channel on slack and ask questions here!](https://code.vmware.com/slack/)
 
