@@ -1,20 +1,14 @@
 <a name="Title">
-# vCheck Daily Report for vSphere
+# vCheck Daily Report for NSX
 [![stars badge]][stars]
 [![forks badge]][forks]
 [![issues badge]][issues]
 
-[stars badge]:https://img.shields.io/github/stars/alanrenouf/vCheck-vSphere.svg
-[forks badge]:https://img.shields.io/github/forks/alanrenouf/vCheck-vSphere.svg
-[issues badge]:https://img.shields.io/github/issues/alanrenouf/vCheck-vSphere.svg
-
-[stars]:https://github.com/alanrenouf/vCheck-vSphere/stargazers
-[forks]:https://github.com/alanrenouf/vCheck-vSphere/network
-[issues]:https://github.com/alanrenouf/vCheck-vSphere/issues
+[stars]:https://github.com/alanrenouf/vCheck-NSX/stargazers
+[forks]:https://github.com/alanrenouf/vCheck-NSX/network
+[issues]:https://github.com/alanrenouf/vCheck-NSX/issues
 
 [Join the VMware Code and #vCheck channel on slack and ask questions here!](https://code.vmware.com/slack/)
-
-![Alt text](https://vcheck.report/samples/vCheck-vSphere_Screenshot.PNG "vCheck Sample")
 
 |Navigation|
 |-----------------|
@@ -43,62 +37,13 @@ This script is not to be confused with an Audit script, although the reporting f
 
 
 <a name="Features">
-# What is checked for in the vSphere version ?
+# What is checked for in the NSX version ?
 [*Back to top*](#Title)
 
-The following items are included as part of the vCheck vSphere download, they are included as vCheck Plugins and can be removed or altered very easily by editing the specific plugin file which contains the data. vCheck Plugins are found under the Plugins folder.
+The following items are included as part of the vCheck NSX download, they are included as vCheck Plugins and can be removed or altered very easily by editing the specific plugin file which contains the data. vCheck Plugins are found under the Plugins folder.
 
 - General Details
-- Number of Hosts
-- Number of VMs
-- Number of Templates
-- Number of Clusters
-- Number of Datastores
-- Number of Active VMs
-- Number of Inactive VMs
-- Number of DRS Migrations for the last days
-- Snapshots over x Days old
-- Datastores with less than x% free space
-- VMs created over the last x days
-- VMs removed over the last x days
-- VMs with No Tools
-- VMs with CD-Roms connected
-- VMs with Floppy Drives Connected
-- VMs with CPU ready over x%
-- VMs with over x amount of vCPUs
-- List of DRS Migrations
-- Hosts in Maintenance Mode
-- Hosts in disconnected state
-- NTP Server check for a given NTP Name
-- NTP Service check
-- vmkernel warning messages ov the last x days
-- VC Error Events over the last x days
-- VC Windows Event Log Errors for the last x days with VMware in the details
-- VC VMware Service details
-- VMs stored on datastores attached to only one host
-- VM active alerts
-- Cluster Active Alerts
-- If HA Cluster is set to use host datastore for swapfile, check the host has a swapfile location set
-- Host active Alerts
-- Dead SCSI Luns
-- VMs with over x amount of vCPUs
-- vSphere check: Slot Sizes
-- vSphere check: Outdated VM Hardware (Less than V7)
-- VMs in Inconsistent folders (the name of the folder is not the same as the name)
-- VMs with high CPU usage
-- Guest disk size check
-- Host over committing memory check
-- VM Swap and Ballooning
-- ESXi hosts without Lockdown enabled
-- ESXi hosts with unsupported mode enabled
-- General Capacity information based on CPU/MEM usage of the VMs
-- vSwitch free ports
-- Disk over commit check
-- Host configuration issues
-- VCB Garbage (left snapshots)
-- HA VM restarts and resets
-- Inaccessible VMs
-- Much, Much more.......
+- TBC
 
 # Installing
 [*Back to top*](#Title)
@@ -121,41 +66,7 @@ In the meantime, don't hesitate to pop over to the [#vCheck channel on slack](ht
 # Release Notes
 [*Back to top*](#Title)
 
-* 6.22 - Fixes to VMware style. Consolidating plugins. Updates to style handling.
-* 6.21 - Added support for charts. New plugins. Support non-standard vCenter Ports. Bugfixes
-* 6.20 - First tagged release. Bugfixes. Email resource support added.
-* 6.19 - Bugfixes.
-* 6.18 - Added Job parameter to allow job specifications via XML file
-* 6.17 - Basic Internationalization (i18n) support
-* 6.16 - Table formatting rules
-* 6.15 - Added Category to all plugins and features to vCheckUtils script for Categorys.
-* 6.14 - Fixed a bug where a plugin was resetting the $VM variable so later plugins were not working :(
-* 6.13 - Fixed issue with plugins 63 and 65 not using the days
-* 6.12 - Changed Version to PluginVersion in each Plugin as the word Version is very hard to isolate!
-* 6.11 - Fixed a copy and paste mistake and plugin issues.
-* 6.10 - Fixed multiple spelling mistakes and small plugin issues
-* 6.9 - Fixed VMKernel logs but had to remove date/Time parser due to inconsistent VMKernel Log entries
-* 6.8 - Added Creator of snapshots back in due to popular demand
-* 6.7 - Added Multiple plugins from contributors - Thanks!
-* 6.6 - Tech Support Mode Plugin fixed to work with 5.0 hosts
-* 6.5 - HW Version plugin fixed due to string output
-* 6.4 - Added a 00 plugin and VeryLastPlugin for vCenter connection info to separate the report entirely from VMware if needed.
-* 6.3 - Changed the format of each Plugin so you can include a count for each header and altered plugin layout for each plugin.
-* 6.2 - Added Time to Run section based on TimeToBuild by Frederic Martin
-* 6.1 - Bug fixes, filter for ps1 files only in the plugins folder so other files can be kept in the plugins folder.
-* 6.0 - Moved plugins into seperate scripts to make it easier to expand vCheck and fixed issues + lots lots more !
-* 5.1 - Code Fixes and ability to change colour for title text to fix issue with Outlook 2007/10 not displaying correctly
-* 5.0 - Changed the order and a few titles etc, tidy up !
-* 4.9 - Added Inacessable VMs
-* 4.8 - Added HA VM restarts and resets
-* 4.7 - VMTools Issues
-* 4.6 - Added VCB Garbage
-* 4.5 - Added Host config issues
-* 4.4 - Added Disk Overcommit check
-* 4.3 - Added vSwitch free ports check
-* 4.2 - Added General Capacity Information based on CPU and MEM ussage per cluster
-* 4.1 - Added the ability to change the colours of the report.
-* 4.0 - HTML Tidy up, comments added for each item and the ability to enable/disable comments.
+* 0.1 - It all starts here!
 
 <a name="Contributing">
 # Contributing
@@ -224,7 +135,7 @@ Anything that is written to stdout is included in the report. This should be eit
   $Display = "List"
   $Author = "Plugin Author"
   $PluginVersion = 1.0
-  $PluginCategory = "vSphere"
+  $PluginCategory = "NSX"
   ```
 ## Table Formatting
 Since v6.16, vCheck has supported Table formatting rules in plugins. This allows you to define a set of rules for data, in order to provide more richly formatted HTML reports.
@@ -323,38 +234,38 @@ You can copy a newer version of vCheckUtils.ps1 to your existing build in order 
 
 To utilize the new functions, simply dot source the vCheckUtils.ps1 file in a PowerShell console:
 ```
-PS E:\scripts\vCheck-vSphere> . .\vCheckUtils.ps1
+PS E:\scripts\vCheck-NSX> . .\vCheckUtils.ps1
 ```
 This should load and list the functions available to you.
 We will be focusing on Export-vCheckSettings and Import-vCheckSettings. If you do not see these listed, you will need a newer version of vCheckUtils.ps1.
 
 ### Example
 Lets assume we have an existing build located at
-`E:\Scripts\vCheck-vSphere`
+`E:\Scripts\vCheck-NSX`
 
 First lets rename the folder
-`E:\Scripts\vCheck-vSphere-old`
+`E:\Scripts\vCheck-NSX-old`
 
-Now we can download the latest build, unblock the zip file and unpack to `E:\Scripts` leaving us with two builds in our Scripts directory - `vCheck-vSphere-old` and `vCheck-vSphere`
+Now we can download the latest build, unblock the zip file and unpack to `E:\Scripts` leaving us with two builds in our Scripts directory - `vCheck-NSX-old` and `vCheck-NSX`
 
-Next we'll export the settings from the old build - using PowerShell navigate to `E:\Scripts\vCheck-vSphere-old` and dot source `vCheckUtils.ps1`
+Next we'll export the settings from the old build - using PowerShell navigate to `E:\Scripts\vCheck-NSX-old` and dot source `vCheckUtils.ps1`
 
 ### Export Settings
 Running `Export-vCheckSettings` will by default create a CSV file named `vCheckSettings.csv` in the current directory.
 You can also specify a settings file
 ```
-PS E:\scripts\vCheck-vSphere-old> Export-vCheckSettings -outfile E:\MyvCheckSettings.csv
+PS E:\scripts\vCheck-NSX-old> Export-vCheckSettings -outfile E:\MyvCheckSettings.csv
 ```
 
 That's all there is to exporting your vCheck settings. Note that the settings file will be overwritten if you were to run the function again.
 
 ### Import Settings
-To import your vCheck settings, in PowerShell navigate to the new build at `E:\Scripts\vCheck-vSphere` and dot source `vCheckUtils.ps1` once again.
+To import your vCheck settings, in PowerShell navigate to the new build at `E:\Scripts\vCheck-NSX` and dot source `vCheckUtils.ps1` once again.
 
 Here we have two options - if we run `Import-vCheckSettings` with no parameters it will expect the `vCheckSettings.csv` file to be in the same directory. If not found it will prompt for the full path to the settings CSV file.
 The second option is to specify the path to the settings CSV file when running Import-vCheckSettings
 ```
-PS E:\scripts\vCheck-vSphere> Import-vCheckSettings -csvfile E:\MyvCheckSettings.csv
+PS E:\scripts\vCheck-NSX> Import-vCheckSettings -csvfile E:\MyvCheckSettings.csv
 ```
 If new settings or plugins have been added to the new build you will be asked to answer the questions, similar to running the initial config. During the import, the initial config is disabled, so once the import is complete you are ready to run your new build.
 
@@ -364,4 +275,4 @@ If new settings or plugins have been added to the new build you will be asked to
 
 For more information please read here: http://www.virtu-al.net/vcheck-pluginsheaders/vcheck/
 
-For an example vSphere output (doesnt contain all info) click here http://virtu-al.net/Downloads/vCheck/vCheck.htm
+For an example NSX output (doesnt contain all info) click here http://virtu-al.net/Downloads/vCheck/vCheck.htm
