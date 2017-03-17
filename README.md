@@ -10,6 +10,7 @@
 
 |Navigation|
 |-----------------|
+|[What is vCheck-NSX](#About)|
 |[About](#About)|
 |[Features](#Features)|
 |[Installing](#Installing)|
@@ -21,9 +22,20 @@
 |[Jobs & Settings](#JobsSettings)|
 |[More Info](#More)|
 
+
+<a name="What">
+
+# What is vCheck-NSX? #
+vCheck-NSX is an NSX-focussed reporting tool that can give you a periodic (i.e. Daily) look into the health of your platform.
+* This tools is based on the awesome [vCheck-vSphere](https://github.com/alanrenouf/vCheck-vSphere) project
+* Initially developed against vSphere 6.0, PowerCLI 6.5 and NSX 6.2.4
+* This report REQUIRES [PowerCLI](https://www.vmware.com/support/developer/PowerCLI/) and [PowerNSX](https://github.com/vmware/powernsx) installation
+* This plugin also REQUIRES a connection to the vSphere server associated with the NSX Manager
+* If you have multiple NSX managers and vCenter Servers, create multiple copies of the vCheck-NSX folder
+
 <a name="About">
 
-# About
+# About vCheck
 [*Back to top*](#Title)
 
 vCheck is a PowerShell HTML framework script, the script is designed to run as a scheduled task before you get into the office to present you with key information via an email directly to your inbox in a nice easily readable format.
@@ -42,18 +54,146 @@ This script is not to be confused with an Audit script, although the reporting f
 
 The following items are included as part of the vCheck NSX download, they are included as vCheck Plugins and can be removed or altered very easily by editing the specific plugin file which contains the data. vCheck Plugins are found under the Plugins folder.
 
-- General Details
-- TBC
+For each check that's written, here's a brief description of what it does.
+
+***
+## Connection Plugin for NSX ##
+### Function ###
+* Uses the nsxMgrCreds.xml file to connect through PowerNSX, to the NSX Manager
+
+### Future Developments ###
+* Detect successful connection to NSX Manager - report if not
+* Detect presence of PowerNSX - report if not
+
+***
+## NSX Manager Resource Util ##
+### Function ###
+* Check for CPU/RAM/Disk use on the NSX Manager
+* Default thresholds for warnings are:
+    + CPU > 50%
+    + RAM > 75%
+    + Disk > 75%
+
+***
+## NSX Manager Service Summary ##
+### Function ###
+* Checks for the running state of the main services on the NSX Manager
+    + "NSX Replicator" i.e. Universal Sync Service
+    + "NSX Manager"
+    + "RabbitMQ"
+    + "vPostGres"
+    + "SSH Service"
+* Compares the running state with the desired state set in the .ps1 file
+* Alerts on any deviation from expected state
+
+***
+## NSX Manager Low Uptime ##
+### Function ###
+* Checks the uptime of the NSX Manager and reports if it's less than the desired number of hours
+* Can help you spot if the NSX Manager has been restarted in the last x Hours
+
+### Future Developments ###
+* Check uptime of NSX controllers and rename this check to "NSX Low Uptime"
+
+***
+## NSX Manager SSO and vCenter Connections ##
+### Function ###
+* Checks for status of SSO and VC connections
+* Compares against desired setting in the .ps1
+* Alerts on any deviation from expected state
+
+***
+## NSX Manager Backup Schedule ##
+### Function ###
+* Checks the configuration of a backup, i.e. "Is one configured for 'Hourly / Daily / Weekly'? "
+
+### Future Developments ###
+* Check for recent backup success
+* Check for specific backup schedule
+
+***
+## NSX Manager NTP Setting ##
+### Function ###
+* Checks the NSX Manager for configured NTP servers against the specified entries in the .ps1
+* Supports multiple NTP servers
+
+### Future Developments ###
+* Confirm NTP configuration is working - detect time drift
+
+***
+## NSX Controller Status Summary ##
+### Function ###
+* Detects the number of deployed, running controllers and compares against the "3" specified in the .ps1
+* Checks for the Ping and Activity status of all peers
+* Throws warnings for any detected issues
+* Handles the detection of Secondary Managers, with no controllers of their own
+
+***
+## NSX Controller Upgrade Availability ##
+### Function ###
+* Detects if NSX Manager is reporting that the controllers can be upgraded
+
+***
+## NSX Controller Disk Latency ##
+### Function ###
+* Detects if the NSX Controllers are warning about poor disk latency
+
+***
+## NSX Syslog Settings ##
+### Function ###
+* Checks for the configuration of the specified syslog server in the .ps1
+* NSX Manager only supports a single syslog server, so does this check
+
+### Future Developments ###
+* Expand the checks to include NSX Controller syslog configuration
+
+***
+## NSX Host Channel Health ##
+### Function ###
+* Checks the Channel Health for all controllers
+    + "Manager to Firewall Agent"
+    + "Manager to Control Plane"
+    + "Control Plane to Controller"
+
+### Future Developments ###
+* Improve the detection of VMhosts that are configured for NSX use
+
+***
+## NSX Connectivity Test ##
+### Function ###
+* NOTHING AS YET, THIS IS CURRENTLY UNDER DEVELOPMENT
+
+### Future Developments ###
+* Check VXLAN functionality by automating ping tests
+
+<a name="Installing">
 
 # Installing
 [*Back to top*](#Title)
 
+For general guidance on the use of [vCheck-vSphere](https://github.com/alanrenouf/vCheck-vSphere) please see the README file hosted there.
+
 Copy the vCheck files to the desired location. Run the script `vCheckUtils.ps1` and call the function `Schedule-vCheck`. Answer the prompts to configure the scheduled job.
+Once this is done, you need to start the creation of an NSX credentials XML file.
+
+>Use the following to create a credential interactively, then store it as an XML file
+
+>`    $newPScreds = Get-Credential -message "Enter the NSX manager admin creds here:"`
+>`    $newPScreds | Export-Clixml nsxmgrCreds.xml`
+
+>Once you have the file, move it into the root of the NSX plugins folder overwriting the blank file that's there
+*Ensure only authorised users (i.e. Sys Admins) have access to the file*
+
+Having the creds stored as a secure file allows for the automation of vCheck script runs.
+If there's a better way to store NSX Manager credentials, I'd like to know.
+
 
 <a name="Enhancements">
 
 # Enhancements
 [*Back to top*](#Title)
+
+* **Report Output** - Make use of table formatting, highlight issues in red
 
 * **Unit Testing / CI** - We are working on full support for [Pester](https://github.com/pester/Pester/blob/master/README.md) tests, which will help automate code validation. We will start small and work to provide as much documentation as we can to help with integration.
 
@@ -81,6 +221,19 @@ See out [Contributions](CONTRIBUTING.md) guidelines
 
 # Plugins
 [*Back to top*](#Title)
+
+## Suggested Plugins for Development ##
+* A check for update availability to the NSX plugin
+* Check for the presence of set routes on DLR/ESG
+* Check anti-affinity rules enabled for nsx components
+* Check Edge / LS status and report if there is any problem
+* Check port group policy is consistent for every VDS used by NSX
+* Report IP Pools running out of free IP's
+* Check if password is close to expire
+* List Major / Critical NSX Manager logs
+* Report Major / Critical Edge Events
+
+Some of the above suggestions have been taken from a [VMTN post](https://communities.vmware.com/message/2590709#2590709)
 
 ## Plugin Structure
 This section describes the basic structure of a vCheck plugin so that you can write your own plugins for either private use, or to contribute to the vCheck project.
