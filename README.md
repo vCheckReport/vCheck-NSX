@@ -57,7 +57,7 @@ The following items are included as part of the vCheck NSX download, they are in
 For each check that's written, here's a brief description of what it does.
 
 ***
-## 01 Connection Plugin for NSX ##
+## Connection Plugin for NSX ##
 ### Function ###
 * Uses the nsxMgrCreds.xml file to connect through PowerNSX, to the NSX Manager
 
@@ -66,7 +66,7 @@ For each check that's written, here's a brief description of what it does.
 * Detect presence of PowerNSX - report if not
 
 ***
-## 151 NSX Manager Resource Util ##
+## NSX Manager Resource Util ##
 ### Function ###
 * Check for CPU/RAM/Disk use on the NSX Manager
 * Default thresholds for warnings are:
@@ -75,7 +75,7 @@ For each check that's written, here's a brief description of what it does.
     + Disk > 75%
 
 ***
-## 152 NSX Manager Service Summary ##
+## NSX Manager Service Summary ##
 ### Function ###
 * Checks for the running state of the main services on the NSX Manager
     + "NSX Replicator" i.e. Universal Sync Service
@@ -87,7 +87,7 @@ For each check that's written, here's a brief description of what it does.
 * Alerts on any deviation from expected state
 
 ***
-## 153 NSX Manager Low Uptime ##
+## NSX Manager Low Uptime ##
 ### Function ###
 * Checks the uptime of the NSX Manager and reports if it's less than the desired number of hours
 * Can help you spot if the NSX Manager has been restarted in the last x Hours
@@ -96,14 +96,14 @@ For each check that's written, here's a brief description of what it does.
 * Check uptime of NSX controllers and rename this check to "NSX Low Uptime"
 
 ***
-## 154 NSX Manager SSO and vCenter Connections ##
+## NSX Manager SSO and vCenter Connections ##
 ### Function ###
 * Checks for status of SSO and VC connections
 * Compares against desired setting in the .ps1
 * Alerts on any deviation from expected state
 
 ***
-## 155 NSX Manager Backup Schedule ##
+## NSX Manager Backup Schedule ##
 ### Function ###
 * Checks the configuration of a backup, i.e. "Is one configured for 'Hourly / Daily / Weekly'? "
 
@@ -112,7 +112,7 @@ For each check that's written, here's a brief description of what it does.
 * Check for specific backup schedule
 
 ***
-## 158 NSX Manager NTP Setting ##
+## NSX Manager NTP Setting ##
 ### Function ###
 * Checks the NSX Manager for configured NTP servers against the specified entries in the .ps1
 * Supports multiple NTP servers
@@ -121,7 +121,7 @@ For each check that's written, here's a brief description of what it does.
 * Confirm NTP configuration is working - detect time drift
 
 ***
-## 161 NSX Controller Status Summary ##
+## NSX Controller Status Summary ##
 ### Function ###
 * Detects the number of deployed, running controllers and compares against the "3" specified in the .ps1
 * Checks for the Ping and Activity status of all peers
@@ -129,17 +129,17 @@ For each check that's written, here's a brief description of what it does.
 * Handles the detection of Secondary Managers, with no controllers of their own
 
 ***
-## 162 NSX Controller Upgrade Availability ##
+## NSX Controller Upgrade Availability ##
 ### Function ###
 * Detects if NSX Manager is reporting that the controllers can be upgraded
 
 ***
-## 163 NSX Controller Disk Latency ##
+## NSX Controller Disk Latency ##
 ### Function ###
 * Detects if the NSX Controllers are warning about poor disk latency
 
 ***
-## 169 NSX Syslog Settings ##
+## NSX Syslog Settings ##
 ### Function ###
 * Checks for the configuration of the specified syslog server in the .ps1
 * NSX Manager only supports a single syslog server, so does this check
@@ -148,7 +148,7 @@ For each check that's written, here's a brief description of what it does.
 * Expand the checks to include NSX Controller syslog configuration
 
 ***
-## 170 NSX Host Channel Health ##
+## NSX Host Channel Health ##
 ### Function ###
 * Checks the Channel Health for all controllers
     + "Manager to Firewall Agent"
@@ -159,7 +159,7 @@ For each check that's written, here's a brief description of what it does.
 * Improve the detection of VMhosts that are configured for NSX use
 
 ***
-## 171 NSX Connectivity Test ##
+## NSX Connectivity Test ##
 ### Function ###
 * NOTHING AS YET, THIS IS CURRENTLY UNDER DEVELOPMENT
 
@@ -170,6 +170,7 @@ For each check that's written, here's a brief description of what it does.
 
 # Installing
 [*Back to top*](#Title)
+
 For general guidance on the use of [vCheck-vSphere](https://github.com/alanrenouf/vCheck-vSphere) please see the README file hosted there.
 
 Copy the vCheck files to the desired location. Run the script `vCheckUtils.ps1` and call the function `Schedule-vCheck`. Answer the prompts to configure the scheduled job.
