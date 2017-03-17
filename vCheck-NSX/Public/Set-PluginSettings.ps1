@@ -25,11 +25,13 @@ Function Set-PluginSettings {
 		[Parameter(mandatory=$false)] [Array]$settings,
 		[Parameter(mandatory=$false)] [Switch]$GB
     )
-	$file = Get-Content $filename
+
+	$file         = Get-Content $filename
 	$OriginalLine = ($file | Select-String -SimpleMatch "# Start of Settings").LineNumber
-	$EndLine = ($file | Select-String -SimpleMatch "# End of Settings").LineNumber
-	$PluginName = ($filename.split("\")[-1]).split(".")[0]
+	$EndLine      = ($file | Select-String -SimpleMatch "# End of Settings").LineNumber
+	$PluginName   = ($filename.split("\")[-1]).split(".")[0]
 	Write-Warning "`nProcessing - $PluginName"
+
 	if (!(($OriginalLine +1) -eq $EndLine)) {
 		$Array = @()
 		$Line = $OriginalLine

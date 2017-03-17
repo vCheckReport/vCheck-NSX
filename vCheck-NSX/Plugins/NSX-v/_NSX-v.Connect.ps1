@@ -8,11 +8,11 @@ $PluginCategory = "NSX"
 
 # Start of Settings
 # Please Specify the address of the NSX Server
-$Server = "192.168.0.0"
+#$Server = "192.168.0.0"
 # End of Settings
 
 # Update settings where there is an override
-$Server = Get-vCheckSetting $Title "Server" $Server
+#$Server = Get-vCheckSetting $Title "Server" $Server
 
 
 function Get-CorePlatform {
@@ -59,15 +59,15 @@ function Get-CorePlatform {
 
 $Platform = Get-CorePlatform
 switch ($platform.OSFamily) {
-    "Darwin" { 
+    "Darwin" {
         $templocation = "/tmp"
         $Outputpath = $templocation
     }
-    "Linux" { 
+    "Linux" {
         $Outputpath = $templocation
         $templocation = "/tmp"
     }
-    "Windows" { 
+    "Windows" {
         $templocation = "$ENV:Temp"
     }
 }

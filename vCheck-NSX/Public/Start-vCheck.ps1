@@ -189,7 +189,8 @@ function Start-vCheck {
         $PluginsSubFolder = Get-ChildItem -Path $PluginsFolder | Where-Object { ($_.PSIsContainer) -and ($_.Name -notmatch "initialize") -and ($_.Name -notmatch "finish") }
         $vCheckPlugins += $PluginsSubFolder | % { Get-ChildItem -Path $_.FullName -filter "*.ps1" | Sort-Object $ToNatural }
         $vCheckPlugins += Get-ChildItem -Path $PluginsFolder -filter "*.ps1" -Recurse | Where-Object { $_.Directory -match "finish" } | Sort-Object $ToNatural
-        $GlobalVariables = $ScriptPath + "\GlobalVariables.ps1"
+        $GlobalVariables = "$PSScriptRoot\..\Config\GlobalVariables.ps1"
+        #$GlobalVariables = "$PSScriptRoot\..\Config\Global.Config.ps1"
     }
 
     ## Determine if the setup wizard needs to run
@@ -213,7 +214,7 @@ function Start-vCheck {
 $global:ReportResources = @{ }
 
 ## Set the StylePath and include it
-$StylePath = $ScriptPath + "\Styles\" + $Style
+$StylePath = "$PSScriptRoot\..\Config\Styles\" + $Style
 if (!(Test-Path ($StylePath))) {
     # The path is not valid
     # Use the default style

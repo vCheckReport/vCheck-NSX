@@ -1,4 +1,4 @@
-function Get-vCheckSeting {
+function Get-vCheckSetting {
 
     <#
     .SYNOPSIS
@@ -63,4 +63,4 @@ function Get-vCheckSeting {
 
     } # end END block
 
-} # end function Get-vCheckSeting
+} # end function Get-vCheckSetting

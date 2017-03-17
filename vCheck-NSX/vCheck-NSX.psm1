@@ -11,6 +11,9 @@ $global:vCheckPath   = $MyInvocation.MyCommand.Definition | Split-Path
 $global:pluginXMLURL = "https://vcheck.report/plugins.xml"
 $global:pluginURL    = "https://raw.github.com/alanrenouf/vCheck-{0}/master/Plugins/{1}/{2}"
 
+# Import vCheck-Utils module into global scope
+Import-Module -Name "$PSScriptRoot\Modules\vCheck-Utils.psm1" -Global
+
 # Import global config file
 $globalConfigFile = (Get-Item "$PSScriptRoot\Config\Global.Config.ps1").FullName
 
