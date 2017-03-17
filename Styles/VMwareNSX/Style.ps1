@@ -1,7 +1,12 @@
-$StyleVersion = 1.1
+# Start of Settings 
+# Show table of centents in report?
+$ShowTOC = $true
+# End of Settings
+
+$StyleVersion = 1.3
 
 # Define Chart Colours
-$ChartColours = @("377C2B", "0A77BA", "1D6325", "89CBE1")
+$ChartColours = @("377C2B", "000000", "777777", "89CBE1")
 $ChartBackground = "FFFFFF"
 
 # Set Chart dimensions (WidthxHeight)
@@ -9,20 +14,12 @@ $ChartSize = "200x200"
 
 # Header Images
 Add-ReportResource "Header-vCheck" ($StylePath + "\Header.jpg") -Used $true
+Add-ReportResource "Header-VMware" ($StylePath + "\Header-vmware.png") -Used $true
 
 # Hash table of key/value replacements
-if ($GUIConfig) {
-    $StyleReplace = @{"_HEADER_" = ("'$reportHeader'");
-                      "_SCRIPT_" = "Get-ConfigScripts";
-                      "_CONTENT_" = "Get-ReportContentHTML";
-                      "_CONFIGEXPORT_" = ("'<div style=""text-align:center;""><button type=""button"" onclick=""createCSV()"">Export Settings</button></div>'")
-                      "_TOC_" = ("''")}
-} else {
-    $StyleReplace = @{"_HEADER_" = ("'$reportHeader'");
-                      "_CONTENT_" = "Get-ReportContentHTML";
-                      "_CONFIGEXPORT_" = ("''")
-                      "_TOC_" = "Get-ReportTOC"}
-}
+$StyleReplace = @{"_HEADER_" = ("'$reportHeader'");
+                  "_CONTENT_" = "Get-ReportContentHTML";
+                  "_TOC_" = "Get-ReportTOC"}
 
 #region Function Defniitions
 <#
@@ -71,13 +68,17 @@ function Get-PluginHTML {
    Generate table of contents
 #>
 function Get-ReportTOC {
-   $TOCHTML = "<ul>"
-   foreach ($pr in ($PluginResult | Where-Object {$_.Details})) {
-      $TOCHTML += ("<li><a style='font-size: 8pt' href='#{0}'>{1}</a></li>" -f $pr.PluginID, $pr.Title)
-   }
-   $TOCHTML += "</ul>"
+   if ($ShowTOC) {
+      $TOCHTML = "<ul>"
+      foreach ($pr in $PluginResult) {
+         if ($pr.Details) {
+            $TOCHTML += ("<li><a href='#{0}'>{1}</a></li>" -f $pr.PluginID, $pr.Title)
+         }
+      }
+      $TOCHTML += "</ul>"
    
-   return $TOCHTML
+      return $TOCHTML
+   }
 }
 #endregion
 
@@ -87,74 +88,65 @@ $ReportHTML = @"
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head>
       <title>_HEADER_</title>
-		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-		<style type='text/css'>
+      <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+      <style type='text/css'>
          table	{
             width: 100%;
             margin: 0px;
             padding: 0px;
          }
-
          tr:nth-child(even) { 
-               background-color: #e5e5e5; 
+            background-color: #e5e5e5; 
          }
-            
          td {
                vertical-align: top; 
                font-family: Tahoma, sans-serif;
                font-size: 8pt;
                padding: 0px;
          }
-                  
          th {
                vertical-align: top;  
-               color: #000000; 
+               color: #333333; 
                text-align: left;
                font-family: Tahoma, sans-serif;
                font-size: 8pt;
          }
-         input {
-            float:right;
-            clear:both;
-         }
          .pluginContent td { padding: 5px; }
-
          .warning { background: #FFFBAA !important }
-			.critical { background: #FFDDDD !important }
+         .critical { background: #FFDDDD !important }
       </style>
-      <script>
-        _SCRIPT_
-      </script>
-	</head>
-	<body style="padding: 0 10px; margin: 0px; font-family:Arial, Helvetica, sans-serif; ">
+   </head>
+   <body style="padding: 0 10px; margin: 0px; font-family:Arial, Helvetica, sans-serif; ">
       <a name="top" />
-        <table width='100%' style='background-color: black; margin: 0; padding: 0;'>
+        <table width='100%' style='background-color: #000000; border-collapse: collapse; border: 0px; margin: 0; padding: 0;'>
          <tr>
-            <td style='background-color: black;'>
+            <td>
                <img src='cid:Header-vCheck' alt='vCheck' />
+            </td>
+            <td style='width: 171px'>
+               <img src='cid:Header-VMware' alt='VMware' />
             </td>
          </tr>
       </table>
       <div style='height: 10px; font-size: 10px;'>&nbsp;</div>
-      <table width='100%'><tr><td style='vertical-align: middle; text-indent: 10px; font-family: Tahoma, sans-serif; font-weight: bold; font-size: 12pt; color: #000000;'>_HEADER_</td></tr></table>
+      <table width='100%'><tr><td style='background-color: #000000; border: 1px solid #000000; vertical-align: middle; height: 30px; text-indent: 10px; font-family: Tahoma, sans-serif; font-weight: bold; font-size: 8pt; color: #FFFFFF;'>_HEADER_</td></tr></table>
       <div>_TOC_</div>
       _CONTENT_
-      _CONFIGEXPORT_
    <!-- CustomHTMLClose -->
    <div style='height: 10px; font-size: 10px;'>&nbsp;</div>
-   <table width='100%'><tr><td style='font-size:9pt; height: 25px; text-align: center; vertical-align: middle; color: #000000;'>vCheck v$($vCheckVersion) by <a href='http://virtu-al.net' sytle='color: white;'>Alan Renouf</a> generated on $($ENV:Computername) on $($Date.ToLongDateString()) at $($Date.ToLongTimeString())</td></tr></table>
+   <table width='100%'><tr><td style='font-size:14px; font-weight:bold; height: 25px; text-align: center; vertical-align: middle; background-color:#000000; color: white;'>vCheck v$($vCheckVersion) by <a href='http://virtu-al.net' sytle='color: white;'>Alan Renouf</a> generated on $($ENV:Computername) on $($Date.ToLongDateString()) at $($Date.ToLongTimeString())</td></tr></table>
    </body>
-</html>      
+</html>
 "@
 
 # Structure of each Plugin
 $PluginHTML = @"
-	<!-- Plugin Start - _TITLE_ -->
+   <!-- Plugin Start - _TITLE_ -->
       <div style='height: 10px; font-size: 10px;'>&nbsp;</div>
       <a name="_PLUGINID_" />
-      <table width='100%' style='padding: 0px; border-collapse: collapse;'><tr><td style='background-color: #6CB82E; border: 1px solid #6CB82E; font-family: Tahoma, sans-serif; font-weight: bold; font-size: 9pt; color: #FFFFFF; text-indent: 10px; height: 30px; vertical-align: middle;'>_TITLE_</td></tr>
-         <tr><td style='margin: 0px; background-color: #E1E1E1; color: #000000; font-style: italic; font-size: 8pt; text-indent: 10px; vertical-align: middle; border-right: 1px solid #E1E1E1; border-left: 1px solid #E1E1E1; height: 20px;'>_COMMENTS_</td></tr>
-         <tr><td style='margin: 0px; padding: 0px; background-color: #FFFFFF; color: #000000; font-size: 8pt; border: #E1E1E1 1px solid;'>_PLUGINCONTENT_</td></tr>
+      <table width='100%' style='padding: 0px; border-collapse: collapse;'><tr><td style='background-color: #777777; border: 1px solid #777777; font-family: Tahoma, sans-serif; font-weight: bold; font-size: 8pt; color: #FFFFFF; text-indent: 10px; height: 30px; vertical-align: middle;'>_TITLE_</td></tr>
+         <tr><td style='margin: 0px; background-color: #f4f7fc; color: #000000; font-style: italic; font-size: 8pt; text-indent: 10px; vertical-align: middle; border-right: 1px solid #bbbbbb; border-left: 1px solid #bbbbbb;'>_COMMENTS_</td></tr>
+         <tr><td style='margin: 0px; padding: 0px; background-color: #f9f9f9; color: #000000; font-size: 8pt; border: #bbbbbb 1px solid;'>_PLUGINCONTENT_</td></tr>
          <tr><td style="text-align: right; background: #FFFFFF"><a href="#top" style="color: black">Back To Top</a>
       </table>
    <!-- Plugin End -->
