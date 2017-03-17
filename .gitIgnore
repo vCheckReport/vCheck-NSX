@@ -1,2 +1,4 @@
 # Ignore Windowscreds.xml
 Windowscreds.xml
+*.DS_Store
+*.vscode
