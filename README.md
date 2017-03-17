@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/vCheckReport/vCheck-NSX/blob/master/Content/nsx-logo-white.png"/>
+</p>
+
 <a name="Title">
 
 # vCheck Daily Report for NSX
