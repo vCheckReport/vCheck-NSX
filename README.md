@@ -173,20 +173,24 @@ For each check that's written, here's a brief description of what it does.
 
 For general guidance on the use of [vCheck-vSphere](https://github.com/alanrenouf/vCheck-vSphere) please see the README file hosted there.
 
-Copy the vCheck files to the desired location. Run the script `vCheckUtils.ps1` and call the function `Schedule-vCheck`. Answer the prompts to configure the scheduled job.
-Once this is done, you need to start the creation of an NSX credentials XML file.
+Copy the vCheck folder to the desired location, note the content structure, in particular the Plugins folder.
+Before you can use vCheck-NSX, you need to create an NSX credentials XML file.
 
 >Use the following to create a credential interactively, then store it as an XML file
 
 >`    $newPScreds = Get-Credential -message "Enter the NSX manager admin creds here:"`
->`    $newPScreds | Export-Clixml nsxmgrCreds.xml`
+>`    $newPScreds | Export-Clixml nsxMgrCreds.xml`
 
->Once you have the file, move it into the root of the NSX plugins folder overwriting the blank file that's there
+>Once you have the file, move it into the root of the "15 NSX" plugins folder overwriting the blank file that's there
 *Ensure only authorised users (i.e. Sys Admins) have access to the file*
 
 Having the creds stored as a secure file allows for the automation of vCheck script runs.
 If there's a better way to store NSX Manager credentials, I'd like to know.
 
+Once the files are in the correct location and the credentials XML file has been created, you need to start the installer.
+Open a PowerCLI window **AS AN ADMINISTRATOR** then run...
+`    vCheck.ps1 -config`
+...which will start the process of configuring your install. During the process, your system will be tested for the installation of PowerNSX and if needed, an installation process will start.
 
 <a name="Enhancements">
 
@@ -208,7 +212,8 @@ In the meantime, don't hesitate to pop over to the [#vCheck channel on slack](ht
 # Release Notes
 [*Back to top*](#Title)
 
-* 0.1 - It all starts here!
+* 0.1 - This is where it began
+* 0.2 - Added support for auto-install of PowerNSX module
 
 <a name="Contributing">
 
