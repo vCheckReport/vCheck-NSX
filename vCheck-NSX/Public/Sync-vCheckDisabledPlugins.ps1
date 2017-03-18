@@ -8,7 +8,7 @@ function Sync-vCheckDisabledPlugins {
 
     .DESCRIPTION
         I wrote it for when I'm upgrading vCheck.  This will go through the old directory and
-		any plugin marked as disabled there will be marked as disabled in the new directory.
+        any plugin marked as disabled there will be marked as disabled in the new directory.
 
     .PARAMETER  OldVcheckDir
         What you you think it is.
@@ -16,7 +16,7 @@ function Sync-vCheckDisabledPlugins {
     .PARAMETER  NewVcheckDir
         No tricks here.
 
-	.EXAMPLE
+    .EXAMPLE
         Sync-vCheckDisabledPlugins -OldVcheckDir c:\scripts\vcheck6\vccenter_old_20150218_163057 -NewVcheckDir c:\scripts\vcheck6\vcenter
 
     .LINK
@@ -24,7 +24,7 @@ function Sync-vCheckDisabledPlugins {
 
 .NOTES
 Recent Comment History
-20150128	cmonahan	Initial release.
+20150128    cmonahan    Initial release.
 
 #>
 
@@ -44,12 +44,12 @@ $OldDisabled = Get-ChildItem $OldVcheckDir -Recurse | ? { $_ -like "*.disabled" 
 $OldDisabled
 
 foreach ($file in $OldDisabled) {
-	Get-ChildItem $NewVcheckDir -Recurse | Where-Object { $_ -match $file.Name } | Select-Object FullName
-	Get-ChildItem $NewVcheckDir -Recurse -Filter $file.BaseName | ForEach-Object { Move-Item -Path $_.FullName -Destination ($_.FullName -replace("ps1","ps1.disabled")) }
+    Get-ChildItem $NewVcheckDir -Recurse | Where-Object { $_ -match $file.Name } | Select-Object FullName
+    Get-ChildItem $NewVcheckDir -Recurse -Filter $file.BaseName | ForEach-Object { Move-Item -Path $_.FullName -Destination ($_.FullName -replace("ps1","ps1.disabled")) }
 }
 
 <# Comment History
-20150128	cmonahan	Initial release.
+20150128    cmonahan    Initial release.
 #>
 
 } # end function

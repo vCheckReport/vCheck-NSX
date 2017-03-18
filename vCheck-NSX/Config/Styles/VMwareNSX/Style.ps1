@@ -90,7 +90,7 @@ $ReportHTML = @"
       <title>_HEADER_</title>
       <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
       <style type='text/css'>
-         table	{
+         table    {
             width: 100%;
             margin: 0px;
             padding: 0px;

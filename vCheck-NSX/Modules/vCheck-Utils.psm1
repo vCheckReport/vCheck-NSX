@@ -83,18 +83,18 @@ Function Export-vCheckSettings {
    Creates CSV file in custom location E:\vCheck-vCenter01.csv
  #>
 
-	Param
+    Param
     (
         [Parameter(mandatory=$false)] [String]$outfile = "$vCheckPath\vCheckSettings.csv"
     )
 
-	$Export = @()
-	$GlobalVariables = "$vCheckPath\GlobalVariables.ps1"
-	$Export = Get-PluginSettings -Filename $GlobalVariables
-	Foreach ($plugin in (Get-ChildItem -Path $vCheckPath\Plugins\* -Include *.ps1, *.ps1.disabled -Recurse)) {
-		$Export += Get-PluginSettings -Filename $plugin.Fullname
-	}
-	$Export | Select-Object filename, question, var | Export-Csv -NoTypeInformation $outfile
+    $Export = @()
+    $GlobalVariables = "$vCheckPath\GlobalVariables.ps1"
+    $Export = Get-PluginSettings -Filename $GlobalVariables
+    Foreach ($plugin in (Get-ChildItem -Path $vCheckPath\Plugins\* -Include *.ps1, *.ps1.disabled -Recurse)) {
+        $Export += Get-PluginSettings -Filename $plugin.Fullname
+    }
+    $Export | Select-Object filename, question, var | Export-Csv -NoTypeInformation $outfile
 }
 
 
@@ -123,17 +123,17 @@ Function Export-vCheckSettingsXML {
  #>
 
 
-	Param
+    Param
     (
         [Parameter(mandatory=$false)] [String]$outfile = "$vCheckPath\vCheckSettings.xml"
     )
 
-	$Export = @()
-	$GlobalVariables = "$vCheckPath\GlobalVariables.ps1"
-	$Export = Get-PluginSettings -Filename $GlobalVariables
-	Foreach ($plugin in (Get-ChildItem -Path $vCheckPath\Plugins\* -Include *.ps1 -Recurse)) {
-		$Export += Get-PluginSettings -Filename $plugin.Fullname
-	}
+    $Export = @()
+    $GlobalVariables = "$vCheckPath\GlobalVariables.ps1"
+    $Export = Get-PluginSettings -Filename $GlobalVariables
+    Foreach ($plugin in (Get-ChildItem -Path $vCheckPath\Plugins\* -Include *.ps1 -Recurse)) {
+        $Export += Get-PluginSettings -Filename $plugin.Fullname
+    }
 
     $xml = "<vCheck>`n"
     foreach ($e in $Export) {
@@ -153,7 +153,7 @@ Function Get-vCheckCommand {
 
 $moduleName = Split-Path $PSScriptRoot -Parent
 
-	Get-Command -Module $moduleName
+    Get-Command -Module $moduleName
 
 }
 
@@ -361,62 +361,62 @@ function Get-vCheckPluginXML {
    $root = $xml.CreateElement("pluginlist")
    [void]$xml.AppendChild($root)
 
-	   foreach ($localPluginFile in (Get-ChildItem -Path $vCheckPath\Plugins\* -Include *.ps1 -Recurse))
-	   {
-		  $localPluginContent = Get-Content $localPluginFile
+       foreach ($localPluginFile in (Get-ChildItem -Path $vCheckPath\Plugins\* -Include *.ps1 -Recurse))
+       {
+          $localPluginContent = Get-Content $localPluginFile
 
-		  if ($localPluginContent | Select-String -SimpleMatch "title")
-		  {
-			  $localPluginName = ($localPluginContent | Select-String -SimpleMatch "Title").toString().split("`"")[1]
-		  }
-		  if($localPluginContent | Select-String -SimpleMatch "description")
-		  {
-			  $localPluginDesc = ($localPluginContent | Select-String -SimpleMatch "description").toString().split("`"")[1]
-		  }
-		  elseif ($localPluginContent | Select-String -SimpleMatch "comments")
-		  {
-			  $localPluginDesc = ($localPluginContent | Select-String -SimpleMatch "comments").toString().split("`"")[1]
-		  }
-		  if ($localPluginContent | Select-String -SimpleMatch "author")
-		  {
-			  $localPluginAuthor = ($localPluginContent | Select-String -SimpleMatch "author").toString().split("`"")[1]
-		  }
-		  if ($localPluginContent | Select-String -SimpleMatch "PluginVersion")
-		  {
-			  $localPluginVersion = @($localPluginContent | Select-String -SimpleMatch "PluginVersion")[0].toString().split(" ")[-1]
-		  }
-		  if ($localPluginContent | Select-String -SimpleMatch "PluginCategory")
-		  {
-			  $localPluginCategory = @($localPluginContent | Select-String -SimpleMatch "PluginCategory")[0].toString().split("`"")[1]
-		  }
+          if ($localPluginContent | Select-String -SimpleMatch "title")
+          {
+              $localPluginName = ($localPluginContent | Select-String -SimpleMatch "Title").toString().split("`"")[1]
+          }
+          if($localPluginContent | Select-String -SimpleMatch "description")
+          {
+              $localPluginDesc = ($localPluginContent | Select-String -SimpleMatch "description").toString().split("`"")[1]
+          }
+          elseif ($localPluginContent | Select-String -SimpleMatch "comments")
+          {
+              $localPluginDesc = ($localPluginContent | Select-String -SimpleMatch "comments").toString().split("`"")[1]
+          }
+          if ($localPluginContent | Select-String -SimpleMatch "author")
+          {
+              $localPluginAuthor = ($localPluginContent | Select-String -SimpleMatch "author").toString().split("`"")[1]
+          }
+          if ($localPluginContent | Select-String -SimpleMatch "PluginVersion")
+          {
+              $localPluginVersion = @($localPluginContent | Select-String -SimpleMatch "PluginVersion")[0].toString().split(" ")[-1]
+          }
+          if ($localPluginContent | Select-String -SimpleMatch "PluginCategory")
+          {
+              $localPluginCategory = @($localPluginContent | Select-String -SimpleMatch "PluginCategory")[0].toString().split("`"")[1]
+          }
 
-		  $pluginXML = $xml.CreateElement("plugin")
-		  $elem=$xml.CreateElement("name")
-		  $elem.InnerText=$localPluginName
-		  [void]$pluginXML.AppendChild($elem)
+          $pluginXML = $xml.CreateElement("plugin")
+          $elem=$xml.CreateElement("name")
+          $elem.InnerText=$localPluginName
+          [void]$pluginXML.AppendChild($elem)
 
-		  $elem=$xml.CreateElement("description")
-		  $elem.InnerText=$localPluginDesc
-		  [void]$pluginXML.AppendChild($elem)
+          $elem=$xml.CreateElement("description")
+          $elem.InnerText=$localPluginDesc
+          [void]$pluginXML.AppendChild($elem)
 
-		  $elem=$xml.CreateElement("author")
-		  $elem.InnerText=$localPluginAuthor
-		  [void]$pluginXML.AppendChild($elem)
+          $elem=$xml.CreateElement("author")
+          $elem.InnerText=$localPluginAuthor
+          [void]$pluginXML.AppendChild($elem)
 
-		  $elem=$xml.CreateElement("version")
-		  $elem.InnerText=$localPluginVersion
-		  [void]$pluginXML.AppendChild($elem)
+          $elem=$xml.CreateElement("version")
+          $elem.InnerText=$localPluginVersion
+          [void]$pluginXML.AppendChild($elem)
 
-		  $elem=$xml.CreateElement("category")
-		  $elem.InnerText=$localPluginCategory
-		  [void]$pluginXML.AppendChild($elem)
+          $elem=$xml.CreateElement("category")
+          $elem.InnerText=$localPluginCategory
+          [void]$pluginXML.AppendChild($elem)
 
-		  $elem=$xml.CreateElement("href")
-		  $elem.InnerText= ($pluginURL -f $localPluginCategory, $localPluginFile.Directory.Name, $localPluginFile.Name)
-		  [void]$pluginXML.AppendChild($elem)
+          $elem=$xml.CreateElement("href")
+          $elem.InnerText= ($pluginURL -f $localPluginCategory, $localPluginFile.Directory.Name, $localPluginFile.Name)
+          [void]$pluginXML.AppendChild($elem)
 
-		  [void]$root.AppendChild($pluginXML)
-	   }
+          [void]$root.AppendChild($pluginXML)
+       }
 
    $xml.save($outputFile)
 }
@@ -451,23 +451,23 @@ Function Import-vCheckSettings {
    Imports settings from CSV file in custom location E:\vCheck-vCenter01.csv
  #>
 
-	Param
+    Param
     (
         [Parameter(mandatory=$false)] [String]$csvfile = "$vCheckPath\vCheckSettings.csv"
     )
 
-	If (!(Test-Path $csvfile)) {
-		$csvfile = Read-Host "Enter full path to settings CSV file you want to import"
-	}
-	$Import = Import-Csv $csvfile
-	$GlobalVariables = "$vCheckPath\GlobalVariables.ps1"
-	$settings = $Import | Where-Object {($_.filename).Split("\")[-1] -eq ($GlobalVariables).Split("\")[-1]}
-	Set-PluginSettings -Filename $GlobalVariables -Settings $settings -GB
-	Foreach ($plugin in (Get-ChildItem -Path $vCheckPath\Plugins\* -Include *.ps1, *.ps1.disabled -Recurse)) {
-		$settings = $Import | Where-Object {($_.filename).Split("\")[-1] -eq ($plugin.Fullname).Split("\")[-1]}
-		Set-PluginSettings -Filename $plugin.Fullname -Settings $settings
-	}
-	Write-Warning "`nImport Complete!`n"
+    If (!(Test-Path $csvfile)) {
+        $csvfile = Read-Host "Enter full path to settings CSV file you want to import"
+    }
+    $Import = Import-Csv $csvfile
+    $GlobalVariables = "$vCheckPath\GlobalVariables.ps1"
+    $settings = $Import | Where-Object {($_.filename).Split("\")[-1] -eq ($GlobalVariables).Split("\")[-1]}
+    Set-PluginSettings -Filename $GlobalVariables -Settings $settings -GB
+    Foreach ($plugin in (Get-ChildItem -Path $vCheckPath\Plugins\* -Include *.ps1, *.ps1.disabled -Recurse)) {
+        $settings = $Import | Where-Object {($_.filename).Split("\")[-1] -eq ($plugin.Fullname).Split("\")[-1]}
+        Set-PluginSettings -Filename $plugin.Fullname -Settings $settings
+    }
+    Write-Warning "`nImport Complete!`n"
 }
 
 

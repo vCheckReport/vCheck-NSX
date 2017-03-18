@@ -72,16 +72,16 @@ function Start-vCheck {
         [string]$job
     )
 
-	 #Requires -Version 3.0
+     #Requires -Version 3.0
 
     $vCheckVersion = "6.23"
     $Date = Get-Date
 
-	# Setup all paths required for script to run
+    # Setup all paths required for script to run
     #$ScriptPath = (Split-Path ((Get-Variable MyInvocation).Value).MyCommand.Path)
     #$PluginsFolder = $ScriptPath + "\Plugins\"
-	$ScriptPath = $PSScriptRoot
-	$PluginsFolder = "$PSScriptRoot\..\Plugins"
+    $ScriptPath = $PSScriptRoot
+    $PluginsFolder = "$PSScriptRoot\..\Plugins"
 
 
 

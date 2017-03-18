@@ -1,8 +1,8 @@
 Function Set-ReportResource {
-	param (
-		$cid
-	)
+    param (
+        $cid
+    )
 
-	# Increment use
-	($global:ReportResources[$cid].Uses)++
+    # Increment use
+    ($global:ReportResources[$cid].Uses)++
 }

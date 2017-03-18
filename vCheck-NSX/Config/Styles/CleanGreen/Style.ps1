@@ -87,9 +87,9 @@ $ReportHTML = @"
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head>
       <title>_HEADER_</title>
-		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-		<style type='text/css'>
-         table	{
+        <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+        <style type='text/css'>
+         table    {
             width: 100%;
             margin: 0px;
             padding: 0px;
@@ -120,13 +120,13 @@ $ReportHTML = @"
          .pluginContent td { padding: 5px; }
 
          .warning { background: #FFFBAA !important }
-			.critical { background: #FFDDDD !important }
+            .critical { background: #FFDDDD !important }
       </style>
       <script>
         _SCRIPT_
       </script>
-	</head>
-	<body style="padding: 0 10px; margin: 0px; font-family:Arial, Helvetica, sans-serif; ">
+    </head>
+    <body style="padding: 0 10px; margin: 0px; font-family:Arial, Helvetica, sans-serif; ">
       <a name="top" />
         <table width='100%' style='background-color: black; margin: 0; padding: 0;'>
          <tr>
@@ -149,7 +149,7 @@ $ReportHTML = @"
 
 # Structure of each Plugin
 $PluginHTML = @"
-	<!-- Plugin Start - _TITLE_ -->
+    <!-- Plugin Start - _TITLE_ -->
       <div style='height: 10px; font-size: 10px;'>&nbsp;</div>
       <a name="_PLUGINID_" />
       <table width='100%' style='padding: 0px; border-collapse: collapse;'><tr><td style='background-color: #6CB82E; border: 1px solid #6CB82E; font-family: Tahoma, sans-serif; font-weight: bold; font-size: 9pt; color: #FFFFFF; text-indent: 10px; height: 30px; vertical-align: middle;'>_TITLE_</td></tr>

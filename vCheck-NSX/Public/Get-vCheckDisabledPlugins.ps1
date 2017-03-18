@@ -21,7 +21,7 @@ function Get-vCheckDisabledPlugins {
 .NOTES
 
 Recent Comment History
-20150128	cmonahan	Initial release.
+20150128    cmonahan    Initial release.
 
 #>
 
