@@ -1,9 +1,10 @@
-NSX-v Plugin
+Plugins
 ========================
 
-
-What is checked?
+NSX-v Plugin
 ------------------------
+
+** What is Checked?**
 
 * NSX Manager
     * Resource Utilization
