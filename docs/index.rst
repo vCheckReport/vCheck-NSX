@@ -2,7 +2,7 @@ vCheck-NSX
 ========================
 
 .. image:: http://readthedocs.org/projects/vcheck-nsx/badge/?version=develop
-   :target: http://vcheck-nsx.readthedocs.io/en/latest/?badge=develop
+   :target: http://vcheck-nsx.readthedocs.io/en/develop/?badge=develop
 
 vCheck-NSX is an NSX-focussed reporting tool that can give you a periodic (i.e. Daily) look into the health of your platform.
 
