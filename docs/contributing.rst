@@ -69,7 +69,7 @@ When contributing to this repository, please follow the following guidelines:
 
 * For all indentation, use 4 spaces instead of tab stops
 * Make sure all files are encoding using UTF-8.
-* `lf` line endings are preferred
+* ``lf`` line endings are preferred
 * Remove empty whitespace at the end of each line/file (most modern text editors allow you to do this by enabling a setting)
 
 
