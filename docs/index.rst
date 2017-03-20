@@ -15,6 +15,7 @@ vCheck-NSX is an NSX-focussed reporting tool that can give you a periodic (i.e. 
 
    requirements
    getting-started
+   plugin-nsx-v
    contributing
    support
 
