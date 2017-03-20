@@ -6,6 +6,8 @@
 
 # vCheck Daily Report for NSX
 
+[![Documentation Status](https://readthedocs.org/projects/vcheck-nsx/badge/?version=latest)](http://vcheck-nsx.readthedocs.io/en/latest/?badge=latest)
+
 [Join the VMware Code and #vCheck channel on slack and ask questions here!](https://code.vmware.com/slack/)
 
 |Navigation|
