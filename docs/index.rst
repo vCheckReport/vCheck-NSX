@@ -21,3 +21,15 @@ vCheck-NSX is an NSX-focussed reporting tool that can give you a periodic (i.e. 
 
    flow_audit
    flow_backup_validation
+
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: Plugin Documentation
+
+   plugin-nsx-v-docs.rst
+   /plugin-docs/nsx-v-docs.rst
+
+   flow_audit
+   flow_backup_validation
