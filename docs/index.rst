@@ -1,12 +1,12 @@
-Vester - Configuration Management for vSphere
+vCheck-NSX
 ========================
 
-.. image:: http://readthedocs.org/projects/vester/badge/?version=latest
+.. image:: http://readthedocs.org/projects/vcheck-nsx/badge/?version=latest
    :target: http://vester.readthedocs.io/en/latest/?badge=latest
 
-Vester is a community project that aims to provide an extremely light-weight approach to vSphere configuration management using Pester and PowerCLI. The end-state configuration for each vSphere component, such as clusters and hosts, are abstracted into a simple config file. The configuration is tested and optionally remediated when drift is identified. The entire project is written in PowerShell. The code is open source, and `available on GitHub`_.
+vCheck-NSX is an NSX-focussed reporting tool that can give you a periodic (i.e. Daily) look into the health of your platform.
 
-.. _available on GitHub: https://github.com/WahlNetwork/Vester
+.. _available on GitHub: https://github.com/vCheckReport/vCheck-NSX
 
 .. toctree::
    :maxdepth: 2
