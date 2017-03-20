@@ -1,0 +1,3 @@
+[submodule "vCheck-NSX/Modules/PowerNSX"]
+	path = vCheck-NSX/Modules/PowerNSX
+	url = https://vScripter@github.com/vmware/powernsx
