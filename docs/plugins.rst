@@ -4,7 +4,8 @@ Plugins
 NSX-v Plugin
 ------------------------
 
-** What is Checked?**
+What is Checked?
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 * NSX Manager
     * Resource Utilization

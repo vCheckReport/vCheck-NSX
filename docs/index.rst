@@ -8,17 +8,25 @@ vCheck-NSX is an NSX-focussed reporting tool that can give you a periodic (i.e. 
 
 .. _available on GitHub: https://github.com/vCheckReport/vCheck-NSX
 
+The documentation for the site is organized into a couple sections:
+
+* :ref:`user-docs`
+* :ref:`plugin-docs`
+
+.. _user-docs:
+
 .. toctree::
    :maxdepth: 2
-   :hidden:
    :caption: User Documentation
 
    requirements
    getting-started
    plugins
    contributing
-
    support
+
+
+.. _plugin-docs:
 
 .. toctree::
    :maxdepth: 2
