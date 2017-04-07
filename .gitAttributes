@@ -8,6 +8,7 @@
 
 # Misc/Others
 *.xml text eol=lf
+*.disabled text eol=lf
 
 # Ignore plugins.xml in exports
 .gitattributes export-ignore
