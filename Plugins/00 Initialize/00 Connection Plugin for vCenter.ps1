@@ -300,3 +300,4 @@ function Get-VIEventPlus {
 		$events
 	}
 }
+
