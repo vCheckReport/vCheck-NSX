@@ -2,12 +2,13 @@
 * text=auto
 
 # Custom for PowerShell
-*.ps1 text eol=crlf
-*.psm1 text eol=crlf
-*.psd1 text eol=crlf
+*.ps1 text eol=lf
+*.psm1 text eol=lf
+*.psd1 text eol=lf
 
 # Misc/Others
-*.xml text eol=crlf
+*.xml text eol=lf
+*.disabled text eol=lf
 
 # Ignore plugins.xml in exports
 .gitattributes export-ignore
