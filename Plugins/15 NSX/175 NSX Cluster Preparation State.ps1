@@ -45,10 +45,11 @@ foreach ($cluster in $clusters)
 $NsxClusterHealthTable | Select-Object "Cluster Name",Feature,"Host Preparation State","Installed","Enabled" | where {$_."Host Preparation State" -eq "Not Ready" -or $_."Installed" -eq "false" -or $_."Enabled" -eq "false"}
 
 # Plugin Outputs
+if ($exclude){$exclusionNote = " - Exlcudes hosts in cluster(s) matching the Regex `'$($exclude)`'"} else {$exclusionNote = ""}
 $PluginCategory = "NSX"
 $Title = "NSX Cluster Preparation State"
 $Header = "NSX Cluster Preparation State"
-$Comments = "NSX cluster(s) are reporting preparation health issues"
+$Comments = "NSX cluster(s) are reporting preparation health issues $($exclusionNote)"
 $Display = "Table"
 $Author = "David Hocking / Adam Baron"
 $PluginVersion = 0.2
