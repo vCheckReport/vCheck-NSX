@@ -50,5 +50,5 @@ $Title = "NSX Cluster Preparation State"
 $Header = "NSX Cluster Preparation State"
 $Comments = "NSX cluster(s) are reporting preparation health issues"
 $Display = "Table"
-$Author = "Dave Hocking / Adam Baron"
+$Author = "David Hocking / Adam Baron"
 $PluginVersion = 0.2
