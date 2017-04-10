@@ -49,11 +49,11 @@ foreach ($nsxHost in $nsxHosts)
 $NsxChannelHealthTable | Select-Object Host,"Manager to Firewall Agent","Manager to Control Plane","Control Plane to Controller" | where {$_."Manager to Firewall Agent" -ne "UP" -or $_."Manager to Control Plane" -ne "UP" -or $_."Control Plane to Controller" -ne "UP"}
 
 # Plugin Outputs
-if ($exclude){$exclusionNote = " - Exlcudes hosts in cluster(s) matching the Regex `'$($exclude)`'"} else {$exclusionNote = ""}
+if ($exclude){$exclusionNote = " - Excludes hosts in cluster(s) matching the Regex `'$($exclude)`'"} else {$exclusionNote = ""}
 $PluginCategory = "NSX"
 $Title = "NSX Host Channel Health"
 $Header = "NSX Host Channel Health"
 $Comments = "NSX Host(s) are reporting communication channel issues $($exclusionNote)"
 $Display = "Table"
 $Author = "David Hocking"
-$PluginVersion = 0.3
+$PluginVersion = 0.4
