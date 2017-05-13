@@ -11,45 +11,17 @@ $nsxUptimeString = $nsxMgrSummary.uptime
 # Split out the NSX Uptime string, using -split instead of .split as this allows multi-char regex splitting
 $nsxUptimeSplits = $nsxUptimeString -split ",\ "
 
-# Detect Uptime in minutes only
-if (($nsxUptimeSplits).count -eq 1)
+# Loop through the splits and detect the number of days/hours/mins
+foreach ($split in $nsxUptimeSplits)
 {
-    # Split on " " and get the first part as the value
-    $nsxUptimeMins = (($nsxUptimeSplits[0]).split(" "))[0]
-
-    # Calculate the Hours
-    $nsxUptime = $nsxUptimeMins / 60
+    # Extract the number of days/hours/minutes
+    if ($split -match 'days'){[int]$days = $split.split(" ")[0]}
+    if ($split -match 'hours'){[int]$hours = $split.split(" ")[0]}
+    if ($split -match 'minutes'){[int]$minutes = $split.split(" ")[0]}
 }
 
-# Detect Uptime in hours and minutes
-if (($nsxUptimeSplits).count -eq 2)
-{
-    # Split the last item on " " and get the first part as the value
-    $nsxUptimeMins = (($nsxUptimeSplits[-1]).split(" "))[0]
-
-    # Split the first item on " " and get the first part as the value
-    [int]$nsxUptimeHrs = (($nsxUptimeSplits[0]).split(" "))[0]
-
-    # Calculate the Hours
-    $nsxUptime = ($nsxUptimeMins / 60) + [int]$nsxUptimeHrs
-}
-
-# Detect Uptime in days, hours and minutes
-if (($nsxUptimeSplits).count -eq 3)
-{
-    # Split the last item on " " and get the first part as the value
-    $nsxUptimeMins = (($nsxUptimeSplits[-1]).split(" "))[0]
-
-    # Split the second item on " " and get the first part as the value
-    [int]$nsxUptimeHrs = (($nsxUptimeSplits[1]).split(" "))[0]
-
-    # Split the first item on " " and get the first part as the value
-    [int]$nsxUptimeDays = (($nsxUptimeSplits[0]).split(" "))[0]
-
-    # Calculate the Hours
-    $nsxUptime = (($nsxUptimeMins / 60) + [int]$nsxUptimeHrs) + ([int]$nsxUptimeDays * 24)
-}
-
+# Total up the number of hours.
+$nsxUptime = ($days*24)+($hours)+($minutes/60)
 
 # If the uptime doesn't match the desired quantity
 if ($nsxUptime -lt $desiredMinUptime)
@@ -61,7 +33,7 @@ if ($nsxUptime -lt $desiredMinUptime)
     $cols = @()
     $cols += New-Object system.Data.DataColumn Name,([string])
     $cols += New-Object system.Data.DataColumn Uptime`(Hr`),([int])
-
+        
     #Add the Columns
     foreach ($col in $cols) {$NsxManagerUptimeTable.columns.add($col)}
 
@@ -71,10 +43,10 @@ if ($nsxUptime -lt $desiredMinUptime)
     # Enter data in the row
     $row.Name = $nsxMgrSummary.hostName
     $row."Uptime`(hr`)" = $nsxUptime
-
+                    
     # Add the row to the table
     $NsxManagerUptimeTable.Rows.Add($row)
-
+ 
     # Display the Backup Frequency Table
     $NsxManagerUptimeTable | Select-Object Name,Uptime`(Hr`)
 }
@@ -83,7 +55,7 @@ if ($nsxUptime -lt $desiredMinUptime)
 $PluginCategory = "NSX"
 $Title = "NSX Manager Low Uptime"
 $Header = "NSX Manager Low Uptime"
-$Comments = "NSX Manager has not met the minium uptime value of $($desiredMinUptime) hours"
+$Comments = "NSX Manager has not met the minimum uptime value of $($desiredMinUptime) hours"
 $Display = "Table"
-$Author = "David Hocking"
+$Author = "Dave Hocking"
 $PluginVersion = 0.2
