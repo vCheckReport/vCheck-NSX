@@ -848,6 +848,7 @@ $embedReport = $MyReport
 Foreach ($cid in $global:ReportResources.Keys) {
 	$embedReport = $embedReport -replace ("cid:{0}" -f $cid), (Get-ReportResource $cid -ReturnType "embed")
 }
+Write-Host $filename
 $embedReport | Out-File -encoding ASCII -filepath $Filename
 
 # Display to screen
